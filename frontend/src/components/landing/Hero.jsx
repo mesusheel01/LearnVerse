@@ -14,10 +14,12 @@ const Hero = () => {
     const fetchCourses = async()=>{
         try{
             setLoading(true)
-            const courses = await axios.get('http://localhost:3000/courses')
+            const response = await axios.get('http://localhost:3000/api/courses')
+            const courses =await response.data
             if(courses.length){
                 setLoading(false)
                 setModelCourse(courses)
+                console.log(modelCourse)
             }
         }catch(err){
             setLoading(false)
@@ -38,8 +40,22 @@ const Hero = () => {
         <div className='flex items-center justify-center text-center text-sm font-aclonica mt-16 text-[.8rem] sm:text[1rem]'>
             <ExploreButton title="Explore button" routeTo='/courses' />
         </div>
-        <div className=''>
-
+        <div className='text-red-400'>
+            {
+                loading && <div>Loading...</div>
+            }{
+                errormsg && <div>{errormsg}</div>
+            }
+            {
+                modelCourse.map((c,key)=>(
+                    <div key={key}>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                        <p></p>
+                    </div>
+                ))
+            }
         </div>
         {/* line */}
         <div className='absolute top-16 w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950 '></div>
