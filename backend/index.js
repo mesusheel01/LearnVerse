@@ -1,11 +1,19 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
 import adminRouter from './routes/adminRoute.js'
 import userRouter from './routes/userRoute.js'
 import publicCourseRouter from './routes/publicCourseRoute.js'
 dotenv.config()
 
 const app = express()
+
+//cors for cross origin resourse sharing
+app.use(cors({
+    origin:'http://localhost:5173',
+    method:['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials:true
+}))
 
 //middleware to accept json body by express
 app.use(express.json())

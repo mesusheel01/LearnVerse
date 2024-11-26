@@ -17,15 +17,15 @@ const Navbar = () => {
 
     return (
         <>
-        <nav className="flex justify-between items-center px-6 py-4 sm:px-10 md:px-14 lg:px-16  dark:bg-bunker-950 text-sm sm:text-base md:text-lg">
+        <nav className="flex justify-between items-center px-6 py-6 sm:px-10 md:px-14 lg:px-16  dark:bg-bunker-950 text-sm sm:text-base md:text-lg">
             {/* Logo */}
-            <div className="text-sm sm:text-lg lg:text-xl font-aclonica dark:text-waikawa-400"
+            <div className="text-lg sm:text-xl lg:text-2xl font-aclonica dark:text-waikawa-400"
             >
                 LearnVerse
             </div>
 
             {/* Links and Buttons */}
-            <div className="flex gap-3 font-aclonica text-[.7rem]  items-center">
+            <div className="flex gap-3 font-aclonica text-[.7rem]  md:text-[.8rem] items-center">
                 <a
                     href="http://localhost:5173/courses"
                     className="hidden sm:inline-block dark:text-waikawa-400  hover:dark:text-waikawa-600 transition duration-300"
@@ -74,7 +74,7 @@ const Navbar = () => {
                 </button>
             </div>
         </nav>
-            <div className='absolute top-16 w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950 '>
+            <div className='absolute top-20 w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950 '>
             </div>
         </>
     )

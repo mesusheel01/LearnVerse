@@ -4,11 +4,15 @@ import { useRecoilState } from 'recoil';
 import { courseAtom } from '../../store/atoms/courseFetch';
 import { loadingAtom, errorAtom } from '../../store/atoms/errorAndLoading';
 import axios from 'axios';
+import CourseCard from './CourseCard';
+import { useNavigate } from 'react-router-dom';
+import Marquee from 'react-fast-marquee';
 
 const Hero = () => {
     const [modelCourse, setModelCourse] = useRecoilState(courseAtom);
     const [loading, setLoading] = useRecoilState(loadingAtom);
     const [errormsg, setErrormsg] = useRecoilState(errorAtom);
+    const navigate = useNavigate();
 
     const fetchCourses = async () => {
         try {
@@ -31,7 +35,6 @@ const Hero = () => {
 
     return (
         <div>
-
             <div className="flex flex-col items-center justify-center gap-8 mt-16 font-aclonica">
                 <p className="dark:text-waikawa-200 text-lg sm:text-2xl md:text-3xl lg:text-4xl">
                     Turn Your Ambitions <br />
@@ -41,55 +44,33 @@ const Hero = () => {
                     Learn in-demand skills with engaging, flexible, and accessible courses tailored to your goals.
                 </p>
             </div>
-            <div className="flex items-center justify-center text-center text-sm font-aclonica mt-16 text-[.8rem] sm:text[1rem]">
+            <div className="flex items-center justify-center text-center text-sm font-aclonica mt-12 text-[.8rem] sm:text[1rem]">
                 <ExploreButton title="Explore button" routeTo="/courses" />
             </div>
-
-
+            {/* Gradient Indicators */}
+            <div className="relative">
+                <div className="absolute gradient-left left-[18vh] top-[3rem] h-[45vh] w-[5vw] rounded-xl bg-gradient-to-r from-waikawa-900 to-transparent"></div>
+                <div className="absolute gradient-right left-[86vw] shadow-lg top-[3rem] h-[45vh] w-[5vw] rounded-xl bg-gradient-to-l from-waikawa-900 to-transparent"></div>
+            </div>
             <div className="text-red-400 mt-8">
-            {loading ? (
-                <div>Loading...</div>
-            ) : errormsg ? (
-                <div>{errormsg}</div>
-            ) : (
-                <div className="overflow-x-auto whitespace-nowrap space-x-4 flex px-4">
-                    {modelCourse.map((course) => (
-                        <div
-                            key={course?._id}
-                            className="inline-block bg-white shadow-md rounded-lg p-4 min-w-[300px] mx-2 transform transition duration-300 hover:scale-105 dark:bg-waikawa-900 dark:text-white"
-                        >
-
-                            <div className="w-full h-40 bg-gray-200 rounded-t-md overflow-hidden">
-                                <img
-                                    src={course?.imageUrl}
-                                    alt={course?.title}
-                                    className="w-full h-full object-cover"
-                                />
+                {loading ? (
+                    <div>Loading...</div>
+                ) : errormsg ? (
+                    <div className="text-red-400">{errormsg}</div>
+                ) : (
+                    <div className="mx-10 md:mx-40">
+                        <Marquee autoFill pauseOnHover>
+                            <div className="overflow-x-auto font-poppins whitespace-nowrap courses space-x-4 flex px-4">
+                                {modelCourse.map((course) => (
+                                    <button onClick={() => navigate('/courses')}>
+                                        <CourseCard course={course} />
+                                    </button>
+                                ))}
                             </div>
-
-
-                            <h3 className="text-xl font-bold mt-4 ">{course?.title}</h3>
-
-
-                            <p className="mt-2 text-sm text-gray-700 dark:text-gray-300">
-                                {course?.description}
-                            </p>
-
-
-                            <div className="mt-4 flex justify-between items-center">
-                                <p className="text-lg font-semibold text-green-600">
-                                    ₹{course?.price}
-                                </p>
-                                <p className="text-sm text-gray-500">
-                                    By: {course?.courseBy}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
-        </div>
-            <div className="absolute top-[98vh] w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950"></div>
+                        </Marquee>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
