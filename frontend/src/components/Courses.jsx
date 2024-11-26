@@ -1,9 +1,10 @@
 import React from 'react'
+import Hero from './landing/Hero'
 
 const Courses = () => {
   return (
     <div>
-      Courses
+      
     </div>
   )
 }

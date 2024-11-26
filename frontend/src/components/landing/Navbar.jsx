@@ -19,7 +19,8 @@ const Navbar = () => {
         <>
         <nav className="flex justify-between items-center px-6 py-4 sm:px-10 md:px-14 lg:px-16  dark:bg-bunker-950 text-sm sm:text-base md:text-lg">
             {/* Logo */}
-            <div className="text-sm sm:text-lg lg:text-xl font-aclonica dark:text-waikawa-400">
+            <div className="text-sm sm:text-lg lg:text-xl font-aclonica dark:text-waikawa-400"
+            >
                 LearnVerse
             </div>
 

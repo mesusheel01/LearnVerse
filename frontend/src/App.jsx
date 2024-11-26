@@ -1,16 +1,18 @@
 import React from 'react'
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Courses from './components/Courses'
 import Signup from './components/Signup'
 import Signin from './components/Signin'
 import Landing from './components/Landing'
 import UserSection from './components/UserSection'
+import { RecoilRoot } from 'recoil'
 
 
 const App = () => {
     // const navigate = useNavigate()
 
   return (
+    <RecoilRoot>
     <BrowserRouter>
         <Routes>
             <Route path='/' element={<Landing />} />
@@ -20,6 +22,7 @@ const App = () => {
             <Route path='/home' element={<UserSection />} />
         </Routes>
     </BrowserRouter>
+    </RecoilRoot>
   )
 }
 

@@ -5,7 +5,7 @@ import { IoLogoInstagram } from 'react-icons/io5'
 
 const Footer = () => {
   return (
-    <footer className="font-aclonica dark:text-waikawa-300   py-6">
+    <footer className=" mt-20 font-aclonica dark:text-waikawa-300   py-6">
       <div className="container mx-auto flex flex-col items-center sm:flex-row sm:justify-between gap-4 px-4">
         {/* Follow Us Section */}
         <div className="text-center sm:text-left">
