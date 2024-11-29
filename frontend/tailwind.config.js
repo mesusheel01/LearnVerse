@@ -21,7 +21,7 @@ export default {
           "waikawa-600": "#6A7FC1", // line
           "waikawa-950": "#262C40", // sub-button background
           "bunker-950": "#0B0F14", // background, dark text
-
+          "input-color":"#10172A",
           // Light mode colors
           "waikawa-100": "#EAEEF4", // background, main button text
           "waikawa-800": "#4A5989", // footers, subtext, courses
