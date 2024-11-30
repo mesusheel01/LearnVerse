@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ExploreButton from '../landing/MainButton';
+import ExploreButton from './MainButton';
 import { useRecoilState } from 'recoil';
 import { courseAtom } from '../../store/atoms/courseFetch';
 import { loadingAtom, errorAtom } from '../../store/atoms/errorAndLoading';
@@ -47,12 +47,14 @@ const Hero = () => {
             <div className="flex items-center justify-center text-center text-sm font-aclonica mt-12 text-[.8rem] sm:text[1rem]">
                 <ExploreButton title="Explore button" routeTo="/courses" />
             </div>
-            {/* Gradient Indicators */}
-            <div className="relative hidden md:block">
+
+            {
+                !loading && !errormsg &&  <div className="relative hidden md:block">
                 <div className="absolute gradient-left top-10  left-[18vh] lg:left-[18vh] lg:top-[3rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-r from-waikawa-900 to-transparent"></div>
                 <div className="absolute gradient-right left-[78vw] lg:left-[86vw] top-[5vh] lg:top-[3rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-l from-waikawa-900 to-transparent"></div>
             </div>
-            <div className="text-red-400 mt-8">
+            }
+            <div className="text-red-400 mt-8 text-center">
                 {loading ? (
                     <div>Loading...</div>
                 ) : errormsg ? (
