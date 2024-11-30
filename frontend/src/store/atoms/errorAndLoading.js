@@ -9,5 +9,5 @@ export const loadingAtom = atom({
 
 export const errorAtom = atom({
     key:"error",
-    default: false
+    default: null
 })

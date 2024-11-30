@@ -48,9 +48,9 @@ const Hero = () => {
                 <ExploreButton title="Explore button" routeTo="/courses" />
             </div>
             {/* Gradient Indicators */}
-            <div className="relative">
-                <div className="absolute gradient-left left-[18vh] top-[3rem] h-[45vh] w-[5vw] rounded-xl bg-gradient-to-r from-waikawa-900 to-transparent"></div>
-                <div className="absolute gradient-right left-[86vw] shadow-lg top-[3rem] h-[45vh] w-[5vw] rounded-xl bg-gradient-to-l from-waikawa-900 to-transparent"></div>
+            <div className="relative hidden md:block">
+                <div className="absolute gradient-left top-10  left-[18vh] lg:left-[18vh] lg:top-[3rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-r from-waikawa-900 to-transparent"></div>
+                <div className="absolute gradient-right left-[78vw] lg:left-[86vw] top-[5vh] lg:top-[3rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-l from-waikawa-900 to-transparent"></div>
             </div>
             <div className="text-red-400 mt-8">
                 {loading ? (

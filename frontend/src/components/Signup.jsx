@@ -8,17 +8,40 @@ import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { PiPassword } from 'react-icons/pi';
 import { isPassAtom } from '../store/atoms/passText';
+import {loadingAtom, errorAtom} from '../store/atoms/errorAndLoading'
+import axios from 'axios';
+
 
 const Signup = () => {
     const [username, setUsername] = useRecoilState(usernameAtom)
     const [password, setPassword] = useRecoilState(passwordAtom)
     const [email, setEmail] = useRecoilState(emailAtom)
-    const [isPassword, setIsPassword] = useRecoilState(isPassAtom)
+    const [isPassword, setIsPassword] = useRecoilState
+    (isPassAtom)
+    const [loading, setLoading] = useRecoilState(loadingAtom)
+    const [error, setError] = useRecoilState(errorAtom)
     const navigate = useNavigate()
 
 
-    function handleSignup(e){
+    const handleSignup = async(e)=>{
         e.preventDefault()
+        try{
+            setLoading(true)
+            const response = await axios.post("http://localhost:3000/api/user/signup", {
+                username,
+                email,
+                password,
+            })
+            console.log(response.data)
+            if(response.data.token){
+                setLoading(false)
+                localStorage.setItem("token", response.data.token)
+            }
+            navigate('/signin')
+        }catch(err){
+            setLoading(false)
+            setError(err.message)
+        }
     }
 
   return (
@@ -48,7 +71,7 @@ const Signup = () => {
                     value={username}
                     placeholder='Sus Kyle'
                     onChange={(e)=> setUsername(e.target.value)}
-                    className='p-1 border border-1 text-white border-waikawa-950 focus:outline-none focus:border-purple-800 pl-2 rounded-lg bg-input-color lg:font-poppins'
+                    className='p-1 border border-1 text-waikawa-200 border-waikawa-950 focus:outline-none focus:border-purple-800 pl-2 rounded-lg bg-input-color lg:font-poppins'
                      />
                 </div>
                 <div className='flex gap-3 lg:gap-6'>
@@ -58,7 +81,7 @@ const Signup = () => {
                     value={email}
                     placeholder='sus@kyle.com'
                     onChange={(e)=> setEmail(e.target.value)}
-                    className='p-1 border border-1 text-white border-waikawa-950 focus:outline-none focus:border-purple-800 pl-2 rounded-lg bg-input-color lg:font-poppins'
+                    className='p-1 border border-1 text-waikawa-200 border-waikawa-950 focus:outline-none focus:border-purple-800 pl-2 rounded-lg bg-input-color lg:font-poppins'
                      />
                 </div>
                 <div className='flex gap-3 lg:gap-6 relative'>
@@ -68,7 +91,7 @@ const Signup = () => {
                     value={password}
                     placeholder='12rjsof5nksf'
                     onChange={(e)=> setPassword(e.target.value)}
-                    className='p-1 border border-1 text-white border-waikawa-950 focus:outline-none lg:font-poppins focus:border-purple-800 pl-2 rounded-lg bg-input-color overflow-hidden '
+                    className='p-1 border border-1 text-waikawa-200 border-waikawa-950 focus:outline-none lg:font-poppins focus:border-purple-800 pl-2 rounded-lg bg-input-color overflow-hidden '
                      />
                      {
                         isPassword?
@@ -89,8 +112,11 @@ const Signup = () => {
                 px-6 lg:px-10 font-poppins
                 dark:text-waikawa-950 p-1 rounded-xl'
             >
-                Signup
+                {loading? "Signing up...": "Signup"}
             </button>
+                {
+                    error && <p>{error}</p>
+                }
             </div>
         </form>
       </div>

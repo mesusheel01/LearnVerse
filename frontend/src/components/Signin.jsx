@@ -6,15 +6,35 @@ import { useNavigate } from 'react-router-dom';
 import { FaRegEye, FaRegEyeSlash, FaRegUser } from 'react-icons/fa';
 import { PiPassword } from 'react-icons/pi';
 import { isPassAtom } from '../store/atoms/passText';
+import { errorAtom, loadingAtom } from '../store/atoms/errorAndLoading';
+import axios from 'axios';
 
 const Signin = () => {
     const [username, setUsername] = useRecoilState(usernameAtom)
     const [password, setPassword] = useRecoilState(passwordAtom)
     const [isPassword, setIsPassword] = useRecoilState(isPassAtom)
+    const [loading, setLoading] = useRecoilState(loadingAtom)
+    const [error, setError] = useRecoilState(errorAtom)
     const navigate = useNavigate()
 
-    function handleSignin(e){
+    const handleSignin = async(e)=>{
         e.preventDefault()
+        try{
+            setLoading(true)
+            const response = await axios.post("http://localhost:3000/api/user/signin", {
+                username,
+                password,
+            })
+            console.log(response.data)
+            if(response.data.token){
+                setLoading(false)
+                localStorage.setItem("token", response.data.token)
+            }
+            navigate('/home')
+        }catch(err){
+            setLoading(false)
+            setError(err.message)
+        }
     }
 
   return (
@@ -69,8 +89,11 @@ const Signin = () => {
                 px-6 lg:px-10 font-poppins
                 dark:text-waikawa-950 p-1 rounded-xl'
             >
-                Signin
+                {loading? "Signin in..." : "Siginin"}
             </button>
+            {
+                error && <p className='text-purple-400'>{error}</p>
+            }
             </div>
         </form>
       </div>
