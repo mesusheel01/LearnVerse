@@ -89,7 +89,7 @@ const Signin = () => {
                 px-6 lg:px-10 font-poppins
                 dark:text-waikawa-950 p-1 rounded-xl'
             >
-                {loading? "Signin in..." : "Siginin"}
+                {loading? "Signin in..." : "Sigin in"}
             </button>
             {
                 error && <p className='text-purple-400'>{error}</p>

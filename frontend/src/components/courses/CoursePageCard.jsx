@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CourseCard = ({ course }) => {
+const CoursePageCard = ({ course }) => {
   return (
     <div key={course._id} className="inline-block mt-4 bg-white shadow-md rounded-xl p-4 max-w-[300px] mx-2 transform transition duration-300 hover:-translate-y-4 dark:bg-waikawa-900 dark:text-white">
       <div className="w-full h-32 bg-gray-200 rounded-t-md overflow-hidden">
@@ -48,4 +48,4 @@ const CourseCard = ({ course }) => {
   );
 };
 
-export default CourseCard;
+export default CoursePageCard;

@@ -9,19 +9,18 @@ import { RecoilRoot } from 'recoil'
 
 
 const App = () => {
-    // const navigate = useNavigate()
 
   return (
     <RecoilRoot>
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<Landing />} />
-            <Route path='/courses' element={<Courses />} />
-            <Route path='/signup' element={<Signup />} />
-            <Route path='/signin' element={<Signin />} />
-            <Route path='/home' element={<UserSection />} />
-        </Routes>
-    </BrowserRouter>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<Landing />} />
+                <Route path='/courses' element={<Courses />} />
+                <Route path='/signup' element={<Signup />} />
+                <Route path='/signin' element={<Signin />} />
+                <Route path='/home' element={<UserSection />} />
+            </Routes>
+        </BrowserRouter>
     </RecoilRoot>
   )
 }
