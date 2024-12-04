@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './courses/Navbar'
 import Main from './courses/Main'
-import Footer from './landing/Footer'
+
 
 const Courses = () => {
   return (
