@@ -3,6 +3,7 @@ import { signinValidator, signupValidator } from '../bodyValidator.js'
 import { User } from '../db/index.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import userCourseRouter from './userCourseRoute.js'
 import purchaseRouter from './purchaseRoute.js'
 
 
@@ -86,6 +87,6 @@ userRouter.post('/signin', async(req,res)=>{
 })
 
 //routing for creating and updating courses by admin
-userRouter.use('/courses', purchaseRouter)
-
+userRouter.use('/courses', userCourseRouter)
+userRouter.use('/purchasedCourses', purchaseRouter)
 export default userRouter

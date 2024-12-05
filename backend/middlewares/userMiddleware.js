@@ -16,6 +16,7 @@ const userMiddleware = (req, res, next)=>{
                 msg: "Invalid token!"
             })
         }
+        console.log(user)
         req.userId = user.userId
         next()
     })

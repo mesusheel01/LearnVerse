@@ -1,19 +1,25 @@
 import axios from 'axios';
 import React from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { errorAtom } from '../../store/atoms/errorAndLoading';
+import { useNavigate } from 'react-router-dom';
+import { courseBuyDetailAtom } from '../../store/atoms/courseBuyDetail';
 
 const CoursePageCard = ({ course }) => {
     const [error, setError] = useRecoilState(errorAtom)
+    const setBuyCourseDetaill = useSetRecoilState(courseBuyDetailAtom)
+    const navigate = useNavigate()
+
+
+
     async function handleCourseClick(courseId){
-        console.log(courseId)
         try{
             const token = localStorage.getItem("token")
             if(!token){
                 setError("Login To purchase!")
                 return
             }
-            const response = await axios.get(`http://localhost:3000/api/courses/${courseId}`,{
+            const response = await axios.get(`http://localhost:3000/api/user/courses/${courseId}`,{
                 headers:{
                     Authorization: `Bearer ${token}`
                 }
@@ -23,8 +29,10 @@ const CoursePageCard = ({ course }) => {
                 setError("Login To purchase!")
             }else{
                 setError(null)
+                setBuyCourseDetaill(response.data.course)
+                navigate(`/courses/${response.data.course?.title}`)
             }
-            
+
         }catch(err){
             console.error(err);
         if (err.response) {

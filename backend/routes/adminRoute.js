@@ -3,7 +3,7 @@ import { signinValidator, signupValidator } from '../bodyValidator.js'
 import { Admin } from '../db/index.js'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import courseRouter from './courseRoute.js'
+import adminCourseRouter from './adminCourseRoute.js'
 
 
 const adminRouter = Router()
@@ -86,6 +86,6 @@ adminRouter.post('/signin', async(req,res)=>{
 })
 
 //routing for creating and updating courses by admin
-adminRouter.use('/courses', courseRouter)
+adminRouter.use('/courses', adminCourseRouter)
 
 export default adminRouter

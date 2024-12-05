@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 export const Sidebar = ({ children }) => {
   const [expanded, setExpanded] = useRecoilState(toggleSidebarAtom);
   const [token, setToken] = useRecoilState(tokenAtom);
-  const navigate = useNavigate()
+
+  
   useEffect(() => {
     const tokenCheck = localStorage.getItem("token");
 
@@ -50,7 +51,7 @@ export const Sidebar = ({ children }) => {
         expanded ? "w-[30vh]" : "w-[10vh]"
       } transition-all duration-300`}
     >
-      <nav className="h-[90%] flex flex-col bg-waikawa-950 border-r border-t border-waikawa-600 shadow-lg">
+      <nav className="h-[91%] flex flex-col bg-waikawa-950 border-r border-t border-waikawa-600 shadow-lg">
         <div className="p-4 pb-2 flex justify-end">
           <button
             onClick={() => setExpanded((curr) => !curr)}
@@ -76,7 +77,7 @@ export const Sidebar = ({ children }) => {
                     Susheelkyle@gmail.com
                   </span>
                 </div>
-                <CgMoreVertical size={20} />
+                <CgMoreVertical size={20} className="text-waikawa-400" onClick={()=>setUserMenu(curr => !curr)} />
               </div>
             )}
           </div>

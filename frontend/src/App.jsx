@@ -6,6 +6,7 @@ import Signin from './components/Signin'
 import Landing from './components/Landing'
 import UserSection from './components/UserSection'
 import { RecoilRoot } from 'recoil'
+import CourseDetail from './components/CourseDetail'
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
             <Routes>
                 <Route path='/' element={<Landing />} />
                 <Route path='/courses' element={<Courses />} />
+                <Route path='/courses/:courses_title' element={<CourseDetail />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/signin' element={<Signin />} />
                 <Route path='/home' element={<UserSection />} />

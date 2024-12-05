@@ -3,12 +3,12 @@ import { courseValidator } from "../bodyValidator.js"
 import { Course } from "../db/index.js"
 import adminMiddleware from '../middlewares/adminMiddleware.js'
 
-const courseRouter = Router()
+const adminCourseRouter = Router()
 
-courseRouter.use(adminMiddleware)
+adminCourseRouter.use(adminMiddleware)
 
 //api to get all the courses
-courseRouter.get('/',  async (req,res)=>{
+adminCourseRouter.get('/',  async (req,res)=>{
     try{
         const courses = await Course.find({adminId: req.adminId})
         res.status(200).json({
@@ -24,7 +24,7 @@ courseRouter.get('/',  async (req,res)=>{
 
 //api for course creation
 
-courseRouter.post('/', async (req, res) => {
+adminCourseRouter.post('/', async (req, res) => {
     const bodyToValidate = req.body;
     const validation = courseValidator.safeParse(bodyToValidate);
     if (!validation.success) {
@@ -56,7 +56,7 @@ courseRouter.post('/', async (req, res) => {
 });
 
 //api for find by id
-courseRouter.get('/:id', async (req,res)=>{
+adminCourseRouter.get('/:id', async (req,res)=>{
     const {id} = req.params
     try{
         const course = await Course.findById(id)
@@ -78,7 +78,7 @@ courseRouter.get('/:id', async (req,res)=>{
 
 //api for updating course
 
-courseRouter.put('/:id' , async(req,res)=>{
+adminCourseRouter.put('/:id' , async(req,res)=>{
     const bodyToValidate = req.body
     const validation = courseValidator.safeParse(bodyToValidate)
     if(!validation.success){
@@ -115,4 +115,4 @@ courseRouter.put('/:id' , async(req,res)=>{
 })
 
 
-export default courseRouter
+export default adminCourseRouter
