@@ -1,8 +1,44 @@
+import axios from 'axios';
 import React from 'react';
+import { useRecoilState } from 'recoil';
+import { errorAtom } from '../../store/atoms/errorAndLoading';
 
 const CoursePageCard = ({ course }) => {
+    const [error, setError] = useRecoilState(errorAtom)
+    async function handleCourseClick(courseId){
+        console.log(courseId)
+        try{
+            const token = localStorage.getItem("token")
+            if(!token){
+                setError("Login To purchase!")
+                return
+            }
+            const response = await axios.get(`http://localhost:3000/api/courses/${courseId}`,{
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            console.log(response.data)
+            if(!response.data || response.data.length === 0){
+                setError("Login To purchase!")
+            }else{
+                setError(null)
+            }
+            
+        }catch(err){
+            console.error(err);
+        if (err.response) {
+            setError(`Error: ${err.response.status} - ${err.response.data.message || 'Something went wrong'}`);
+            } else if (err.request) {
+                setError('Network error or no response from server.');
+            } else {
+                setError('An unexpected error occurred.');
+            }
+        }
+    }
+
   return (
-    <div key={course._id} className="inline-block mt-4 bg-white shadow-md rounded-xl p-4 max-w-[300px] mx-2 transform transition duration-300 hover:-translate-y-4 dark:bg-waikawa-900 dark:text-white">
+    <div key={course._id} className="mt-4 bg-white shadow-md rounded-xl p-4 max-w-[300px] mx-2 flex flex-col transform transition duration-300  dark:bg-waikawa-900 dark:text-white">
       <div className="w-full h-32 bg-gray-200 rounded-t-md overflow-hidden">
         <img
           src={course?.imageUrl}
@@ -30,7 +66,7 @@ const CoursePageCard = ({ course }) => {
           wordWrap: 'break-word',
           overflowWrap: 'break-word',
           whiteSpace: 'normal',
-          minHeight: '64px', // Ensure description has a consistent height
+          minHeight: '64px',
         }}
       >
         {course?.description}
@@ -44,6 +80,7 @@ const CoursePageCard = ({ course }) => {
           By: {course?.courseBy}
         </p>
       </div>
+      <button onClick={()=>handleCourseClick(course._id)} className=' p-2 bg-waikawa-950 rounded-xl hover:bg-white transition-all duration-300 font-poppins hover:text-bunker-950 mt-2'>{error ? error: "Buy Course"}</button>
     </div>
   );
 };

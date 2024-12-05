@@ -9,12 +9,16 @@ import { HiOutlineHome } from 'react-icons/hi';
 import { GoBook } from 'react-icons/go';
 import { BsSave2 } from 'react-icons/bs';
 import { Sidebar, SideBarItem } from './SideBar';
+import { useNavigate } from 'react-router-dom';
+import { tokenAtom } from '../../store/atoms/tokenCheck';
 
 const Main = () => {
     const [modelCourse, setModelCourse] = useRecoilState(courseAtom);
     const [loading, setLoading] = useRecoilState(loadingAtom);
     const [errormsg, setErrormsg] = useRecoilState(errorAtom);
-    const expanded = useRecoilValue(toggleSidebarAtom); // Sidebar state
+    const expanded = useRecoilValue(toggleSidebarAtom);
+    const token = useRecoilValue(tokenAtom)
+    const navigate = useNavigate()
 
     const fetchCourses = async () => {
         try {
@@ -40,11 +44,11 @@ const Main = () => {
             <div
                 className={`${
                     expanded ? 'w-54' : 'w-16'
-                } bg-gray-100 fixed top-[10.36vh] flex-shrink-0 h-full transition-all duration-300 z-10`}
+                } bg-gray-100 fixed top-[10.vh] flex-shrink-0 h-full transition-all duration-300 z-10`}
             >
                 <Sidebar>
                     <SideBarItem
-                        icon={<HiOutlineHome className="text-waikawa-600" size={25} />}
+                        icon={<HiOutlineHome  className="text-waikawa-600" size={25} />}
                         text="Home"
                     />
                     <SideBarItem
@@ -52,10 +56,12 @@ const Main = () => {
                         text="Courses"
                         active
                     />
-                    <SideBarItem
+                    {
+                        token && <SideBarItem
                         icon={<BsSave2 className="text-waikawa-600 ml-[2px]" size={20} />}
                         text="Purchases"
                     />
+                    }
                 </Sidebar>
             </div>
 
@@ -66,11 +72,11 @@ const Main = () => {
                 ) : errormsg ? (
                     <div className="text-red-400 text-center">{errormsg}</div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+                    <div className="grid ml-12 md:ml-5 lg:ml-10 xl:ml-16 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
                         {modelCourse.map((course) => (
-                            <button key={course.id}>
+                            <div key={course._id}>
                                 <CoursePageCard course={course} />
-                            </button>
+                            </div>
                         ))}
                     </div>
                 )}

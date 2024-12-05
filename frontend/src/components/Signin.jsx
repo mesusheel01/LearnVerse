@@ -19,22 +19,6 @@ const Signin = () => {
   const navigate = useNavigate();
   const setToken = useSetRecoilState(tokenAtom);
 
-  useEffect(() => {
-    // Check if the token exists and is not expired when the component mounts
-    const storedToken = localStorage.getItem('token');
-    const tokenExpiry = localStorage.getItem('tokenExpiry');
-
-    if (storedToken && tokenExpiry) {
-      if (new Date().getTime() < parseInt(tokenExpiry, 10)) {
-        setToken({ token: storedToken, expiry: parseInt(tokenExpiry, 10) });
-      } else {
-        // If the token is expired, clear it
-        localStorage.removeItem('token');
-        localStorage.removeItem('tokenExpiry');
-        setToken(null);
-      }
-    }
-  }, [setToken]);
 
   const handleSignin = async (e) => {
     e.preventDefault();
@@ -46,19 +30,13 @@ const Signin = () => {
       });
 
       if (response.data.token) {
-        setLoading(false);
-        // Store the token and expiration time in localStorage
-        const tokenExpiry = new Date().getTime() + 3600 * 1000; // 1 hour from now
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('tokenExpiry', tokenExpiry.toString());
-
-        // Set the token in Recoil state
-        setToken({ token: response.data.token, expiry: tokenExpiry });
-
-        // Redirect after successful login
+        setToken(response.data.token);
+        localStorage.setItem("token", response.data.token);
+        console.log(response.data.token)
         navigate('/home');
+    }
       }
-    } catch (err) {
+     catch (err) {
       setLoading(false);
       setError(err.message);
     }

@@ -87,7 +87,7 @@ const Navbar = () => {
                     </button>
                 </div>
             </nav>
-            <div className='absolute top-[10.3vh] w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950'></div>
+            <div className='absolute top-[10.vh] w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950'></div>
         </>
     )
 }
