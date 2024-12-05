@@ -9,4 +9,4 @@
 
 # Figma Designs
 
-- **Main Landing Page** :- ![alt text](image-1.png)
+- **Main Landing Page** :- ![alt text](image.png)
