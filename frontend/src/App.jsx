@@ -6,7 +6,7 @@ import Signin from './components/Signin'
 import Landing from './components/Landing'
 import UserSection from './components/UserSection'
 import { RecoilRoot } from 'recoil'
-import CourseDetail from './components/CourseDetail'
+import {CourseDetail} from './components/CourseDetail'
 
 
 const App = () => {

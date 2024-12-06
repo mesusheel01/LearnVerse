@@ -46,7 +46,7 @@ const CoursePageCard = ({ course }) => {
     }
 
   return (
-    <div key={course._id} className="mt-4 bg-white shadow-md rounded-xl p-4 max-w-[300px] mx-2 flex flex-col transform transition duration-300  dark:bg-waikawa-900 dark:text-white">
+    <div key={course._id} className="mt-4 bg-white shadow-lg rounded-xl p-4 max-w-[300px] mx-2 border border-waikawa-600 flex flex-col transform transition duration-300  dark:bg-waikawa-900 dark:text-white">
       <div className="w-full h-32 bg-gray-200 rounded-t-md overflow-hidden">
         <img
           src={course?.imageUrl}

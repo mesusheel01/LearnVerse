@@ -29,7 +29,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="fixed top-0 left-0 h-20 w-full flex justify-between items-center px-6 py-4 sm:px-10 md:px-14 lg:px-16 text-sm sm:text-base md:text-lg dark:bg-bunker-950 shadow-md z-50">
+            <nav className="fixed top-0 left-0 h-20 w-full flex justify-between border-b border-waikawa-600 items-center px-6 py-4 sm:px-10 md:px-14 lg:px-16 text-sm sm:text-base md:text-lg dark:bg-bunker-950 shadow-md z-50">
                 {/* Logo */}
                 <div className="text-lg sm:text-xl lg:text-2xl font-aclonica dark:text-waikawa-400">
                     LearnVerse
@@ -87,7 +87,6 @@ const Navbar = () => {
                     </button>
                 </div>
             </nav>
-            <div className='absolute top-[10.vh] w-full h-[1px] dark:bg-waikawa-600 light:text-waikawa-950'></div>
         </>
     )
 }

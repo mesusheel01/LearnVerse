@@ -1,24 +1,15 @@
 import React, { useEffect } from 'react';
 import { courseAtom } from '../../store/atoms/courseFetch';
 import { errorAtom, loadingAtom } from '../../store/atoms/errorAndLoading';
-import { toggleSidebarAtom } from '../../store/atoms/toggleSidebar';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState} from 'recoil';
 import axios from 'axios';
 import CoursePageCard from './CoursePageCard';
-import { HiOutlineHome } from 'react-icons/hi';
-import { GoBook } from 'react-icons/go';
-import { BsSave2 } from 'react-icons/bs';
-import { Sidebar, SideBarItem } from './SideBar';
-import { useNavigate } from 'react-router-dom';
-import { tokenAtom } from '../../store/atoms/tokenCheck';
+import SideBar from './SideBar';
 
 const Main = () => {
     const [modelCourse, setModelCourse] = useRecoilState(courseAtom);
     const [loading, setLoading] = useRecoilState(loadingAtom);
     const [errormsg, setErrormsg] = useRecoilState(errorAtom);
-    const expanded = useRecoilValue(toggleSidebarAtom);
-    const token = useRecoilValue(tokenAtom)
-    const navigate = useNavigate()
 
     const fetchCourses = async () => {
         try {
@@ -41,30 +32,7 @@ const Main = () => {
     return (
         <div className="flex min-h-screen mt-20">
             {/* Sidebar */}
-            <div
-                className={`${
-                    expanded ? 'w-54' : 'w-16'
-                } bg-gray-100 fixed top-[10.vh] flex-shrink-0 h-full transition-all duration-300 z-10`}
-            >
-                <Sidebar>
-                    <SideBarItem
-                        icon={<HiOutlineHome  className="text-waikawa-600" size={25} />}
-                        text="Home"
-                    />
-                    <SideBarItem
-                        icon={<GoBook className="text-waikawa-600" size={25} />}
-                        text="Courses"
-                        active
-                    />
-                    {
-                        token && <SideBarItem
-                        icon={<BsSave2 className="text-waikawa-600 ml-[2px]" size={20} />}
-                        text="Purchases"
-                    />
-                    }
-                </Sidebar>
-            </div>
-
+            <SideBar />
             {/* Courses Section */}
             <div className="flex-grow p-4 ml-20">
                 {loading ? (
