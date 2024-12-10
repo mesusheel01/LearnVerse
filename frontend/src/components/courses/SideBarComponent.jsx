@@ -55,7 +55,7 @@ export const SidebarComponent = ({ children }) => {
         <div className="p-4 pb-2 flex justify-end">
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className={`p-2 -translate-x-1 lg:-translate-x-3 text-waikawa-200 text-xl ${expanded?"hover:-translate-x-3":"hover:translate-x-1"}  transition-all duration-300 rounded-lg `}
+            className={`p-2 -translate-x-1 lg:-translate-x-1 xl:-translate-x-3 text-waikawa-200 text-xl ${expanded?"hover:-translate-x-3 lg:hover:-translate-x-6":" hover:translate-x-2 lg:translate-x-0"}  transition-all duration-300 rounded-lg `}
           >
             {expanded ? <MdKeyboardDoubleArrowLeft /> : <MdKeyboardDoubleArrowRight />}
           </button>

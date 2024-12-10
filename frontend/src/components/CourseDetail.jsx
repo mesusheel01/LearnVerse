@@ -24,7 +24,8 @@ export const MainCourseDetail = () => {
     console.log(courseBuyDetail);
 
     return (
-      <div className='grid-cols-2'>
+    <div className='absolute mt-60 w-full'>
+      <div className='flex items-center'>
         <div className={`col-span-1 m-2 ml-0 lg:ml-2 transition-all duration-300 bg-waikawa-950 h-[30vh] p-4 rounded-xl shadow-lg w-[79%]
 ${expanded
     ? "translate-x-[31vh] md:w-[90%] sm:w-[95%] w-full "
@@ -39,6 +40,7 @@ ${expanded
   }`}>
 
         </div>
+      </div>
       </div>
     );
   };
