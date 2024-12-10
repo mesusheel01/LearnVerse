@@ -14,9 +14,14 @@ const Main = () => {
     const fetchCourses = async () => {
         try {
             setLoading(true);
-            const { data } = await axios.get('http://localhost:3000/api/courses');
-            if (data.courses && data.courses.length) {
+            const { allCourse } = await axios.get('http://localhost:3000/api/courses');
+            const { userPurchases } = await axios.get('http://localhost:3000/api/user/purchases');
+
+            if (allCourse.courses && allCourse.courses.length) {
                 setModelCourse(data.courses);
+            }
+            if (userPurchases.courses && userPurchases.courses.length) {
+                setPurchases(data.courses);
             }
             setLoading(false);
         } catch (err) {

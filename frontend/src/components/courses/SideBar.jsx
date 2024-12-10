@@ -15,7 +15,7 @@ const SideBar = () => {
       <div
             className={`${
                 expanded ? 'w-54' : 'w-16'
-            } fixed top-[10.vh] flex-shrink-0 h-full transition-all duration-300 z-10`}
+            } fixed top-[10.vh] flex-shrink-0 transition-all duration-300 z-10`}
         >
             <SidebarComponent >
                 <SideBarItem
