@@ -4,12 +4,13 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { errorAtom } from '../../store/atoms/errorAndLoading';
 import { useNavigate } from 'react-router-dom';
 import { courseBuyDetailAtom } from '../../store/atoms/courseBuyDetail';
+import { buttonMsgAtom } from '../../store/atoms/buttonMsg';
 
 const CoursePageCard = ({ course }) => {
     const [error, setError] = useRecoilState(errorAtom)
     const setBuyCourseDetaill = useSetRecoilState(courseBuyDetailAtom)
     const navigate = useNavigate()
-
+    const setButtonMsg = useSetRecoilState(buttonMsgAtom)
 
 
     async function handleCourseClick(courseId){
@@ -30,6 +31,7 @@ const CoursePageCard = ({ course }) => {
             }else{
                 setError(null)
                 setBuyCourseDetaill(response.data.course)
+                setButtonMsg(course.buttonMsg)
                 navigate(`/courses/${response.data.course?.title}`)
             }
 
@@ -88,7 +90,7 @@ const CoursePageCard = ({ course }) => {
           By: {course?.courseBy}
         </p>
       </div>
-      <button onClick={()=>handleCourseClick(course._id)} className=' p-2 bg-waikawa-950 rounded-xl hover:bg-white transition-all duration-300 font-poppins hover:text-bunker-950 mt-2'>{error ? error: "Buy Course"}</button>
+      <button onClick={()=>handleCourseClick(course._id)} className=' p-2 bg-waikawa-950 rounded-xl hover:bg-white transition-all duration-300 font-poppins hover:text-bunker-950 mt-2'>{error ? error: course.buttonMsg}</button>
     </div>
   );
 };

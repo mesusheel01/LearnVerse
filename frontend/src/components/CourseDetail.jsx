@@ -22,7 +22,7 @@ export const MainCourseDetail = () => {
   const [error, setError] = useRecoilState(errorAtom);
   const [loading, setLoading] = useRecoilState(loadingAtom);
   const [buttonMsg, setButtonMsg] = useRecoilState(buttonMsgAtom);
-
+  console.log(buttonMsg)
   const handleCoursePurchase = async (courseId) => {
     try {
       setLoading(true);
@@ -90,9 +90,9 @@ export const MainCourseDetail = () => {
         </div>
         <button
           onClick={() => handleCoursePurchase(courseBuyDetail?._id)}
-          className="hover:dark:bg-waikawa-400 dark:bg-bunker-950 dark:text-waikawa-100 transition-all duration-300 px-6 w-[20vh] absolute top-[40vh] left-44 border-t shadow-lg shadow-red-300 hover:border-waikawa-600 hover:dark:text-waikawa-950 p-2 rounded-xl"
+          className="dark:bg-bunker-950 dark:text-waikawa-100 transition-all duration-300 px-6 w-[20vh] absolute top-[40vh] left-44 border hover:shadow-lg hover:shadow-red-300 hover:border-waikawa-600  p-2 rounded-xl"
         >
-          {loading ? 'Buying...' : buttonMsg || 'Buy now'}
+          {loading ? 'Buying...' : buttonMsg === 'View Details'?"Already Purchased!": "Buy Now"}
         </button>
         {error && <p className="text-red-200 mt-2">{error.message || 'An error occurred'}</p>}
       </div>
