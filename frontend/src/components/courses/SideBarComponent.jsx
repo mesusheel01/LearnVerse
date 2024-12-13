@@ -1,11 +1,13 @@
 import { CgMoreVertical } from "react-icons/cg";
 import { toggleSidebarAtom } from "../../store/atoms/toggleSidebar";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
 import image from '../../assets/Images/image.png'
 import { tokenAtom } from "../../store/atoms/tokenCheck";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {activeAtom}  from '../../store/atoms/sidebarActiveState'
+
 
 export const SidebarComponent = ({ children }) => {
   const [expanded, setExpanded] = useRecoilState(toggleSidebarAtom);
@@ -51,11 +53,11 @@ export const SidebarComponent = ({ children }) => {
         expanded ? "w-[30vh]" : "w-[10vh]"
       } transition-all duration-300 m-2  `}
     >
-      <nav className="h-[91%] rounded-xl flex flex-col bg-waikawa-950 border-r border-waikawa-600 shadow-lg">
+      <nav className="h-[89%] rounded-xl flex flex-col bg-waikawa-950 border-r border-waikawa-600 shadow-lg">
         <div className="p-4 pb-2 flex justify-end">
           <button
             onClick={() => setExpanded((curr) => !curr)}
-            className={`p-2 -translate-x-1 lg:-translate-x-1 xl:-translate-x-3 text-waikawa-200 text-xl ${expanded?"hover:-translate-x-3 lg:hover:-translate-x-6":" hover:translate-x-2 lg:translate-x-0"}  transition-all duration-300 rounded-lg `}
+            className={`p-2 - text-waikawa-200 text-xl ${expanded?"hover:-translate-x-3":" hover:translate-x-2 lg:translate-x-0"}  transition-all duration-300 rounded-lg `}
           >
             {expanded ? <MdKeyboardDoubleArrowLeft /> : <MdKeyboardDoubleArrowRight />}
           </button>
@@ -87,48 +89,48 @@ export const SidebarComponent = ({ children }) => {
   );
 };
 
-export function SideBarItem({ icon, text, active }) {
-  const [expanded] = useRecoilState(toggleSidebarAtom);
-  const navigate = useNavigate()
-  function handleNavigationClick(){
-    const currentPath = window.location.pathname
-    console.log(currentPath)
-    let target = ''
-     if(text==='Home'){
-         target = '/'
-        }
-        else if( text==='Purchases'){
-            target= '/home'
-        }else if(text === 'Courses'){
-            target = '/courses'
-        }
-        if(currentPath !== target){
-            navigate(target)
-        }
-  }
+export function SideBarItem({ icon, text, isActive, onClick }) {
+    const expanded = useRecoilValue(toggleSidebarAtom);
+    const navigate = useNavigate();
 
-  return (
-    <li
-      onClick={handleNavigationClick}
-      className={`relative flex items-center py-2 px-3 my-1 font-medium rounded-md cursor-pointer transition-colors text-waikawa-200 hover:text-waikawa-950 group ${
-        active ? "bg-waikawa-900" : "hover:bg-waikawa-200"
-      }`}
-    >
-      {icon}
-      <span
-        className={`${
-          expanded ? "ml-5" : "w-0"
-        } overflow-hidden text-md font-poppins`}
+    function handleNavigationClick() {
+      const currentPath = window.location.pathname;
+      let target = '';
+      if (text === 'Home') {
+        target = '/';
+      } else if (text === 'Purchases') {
+        target = '/home';
+      } else if (text === 'Courses') {
+        target = '/courses';
+      }
+      if (currentPath !== target) {
+        navigate(target);
+      }
+      onClick(); // Call the parent-provided onClick handler
+    }
+
+    return (
+      <li
+        onClick={handleNavigationClick}
+        className={`relative flex items-center py-2 px-3 my-1 ml-1 font-medium rounded-md cursor-pointer transition-colors text-waikawa-200 hover:text-waikawa-950 group ${
+          isActive ? 'bg-waikawa-900' : 'hover:bg-waikawa-200'
+        }`}
       >
-        {text}
-      </span>
-      {!expanded && (
-        <div
-          className={`absolute left-full rounded-md px-2 ml-6 text-sm text-waikawa-400 bg-bunker-950 p-1 invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
+        {icon}
+        <span
+          className={`${
+            expanded ? 'ml-5' : 'w-0'
+          } overflow-hidden text-md font-poppins`}
         >
           {text}
-        </div>
-      )}
-    </li>
-  );
-}
+        </span>
+        {!expanded && (
+          <div
+            className={`absolute left-full rounded-md px-2 ml-6 text-sm text-bunker-950 bg-waikawa-300 p-1 invisible opacity-20 -translate-x-3 transition-all group-hover:visible group-hover:opacity-100 group-hover:translate-x-0`}
+          >
+            {text}
+          </div>
+        )}
+      </li>
+    );
+  }

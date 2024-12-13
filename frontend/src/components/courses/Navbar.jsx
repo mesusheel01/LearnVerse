@@ -42,7 +42,7 @@ const Navbar = () => {
                         type='text'
                         placeholder='Search Courses...'
                         onChange={handleLiveInputSearch}
-                        className='rounded-xl w-full pl-3 text-sm p-1 bg-input-color border border-1 text-waikawa-300 font-poppins border-waikawa-950 focus:outline-none focus:border-purple-800'
+                        className='rounded-xl w-full pl-3 text-sm p-1 bg-input-color border border-1 text-waikawa-300 py-[.8vh] font-poppins border-waikawa-950 focus:outline-none focus:border-purple-800'
                     />
                     <CiSearch onClick={giveRefToInput} className='text-waikawa-200 text-xl hover:text-2xl transition-all duration-200 hover:mt-0' />
                 </div>
