@@ -15,8 +15,3 @@ export const passwordAtom = atom({
     key:'password',
     default: ''
 })
-
-export const liveInputAtom = atom({
-    key:'live-input',
-    default: ""
-})

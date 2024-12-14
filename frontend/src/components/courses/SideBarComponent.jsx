@@ -6,20 +6,21 @@ import image from '../../assets/Images/image.png'
 import { tokenAtom } from "../../store/atoms/tokenCheck";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { RiLogoutCircleLine } from "react-icons/ri";
 
 
 export const SidebarComponent = ({ children }) => {
   const [expanded, setExpanded] = useRecoilState(toggleSidebarAtom);
   const [token, setToken] = useRecoilState(tokenAtom);
   const [username, setUsername] = useState("")
+  const [menuExpanded, setMenuExpanded] = useState(false)
 
   useEffect(() => {
     const tokenCheck = localStorage.getItem("token");
-    const decode = jwtDecode(token)
-    setUsername(decode.username)
     if (tokenCheck) {
       const decodedToken = JSON.parse(atob(tokenCheck.split(".")[1]));
+      console.log(decodedToken)
+      setUsername(decodedToken.username)
       const expiryTime = decodedToken.exp * 1000 + 3600;
 
       if (Date.now() < expiryTime) {
@@ -48,6 +49,15 @@ export const SidebarComponent = ({ children }) => {
     };
   }, []);
 
+  const handleMenuExpanding = ()=>{
+    setMenuExpanded(!menuExpanded)
+  }
+    const handleLogout = ()=>{
+        localStorage.removeItem("token");
+        window.location.href = 'http://localhost:5173'
+    }
+console.log(menuExpanded)
+
   return (
     <aside
       className={`h-screen ${
@@ -70,16 +80,27 @@ export const SidebarComponent = ({ children }) => {
             <img
               src={image}
               alt="user_image"
-              className="w-10 h-10 rounded-md bg-waikawa-800"
+              className="w-10 translate-x-2 h-10 rounded-md bg-waikawa-800"
             />
             {expanded && (
-              <div className="flex justify-between items-center w-full ml-5 ">
+              <div className="flex justify-between items-center w-full ml-10 ">
                 <div className="bg-waikawa-800 rounded-lg p-2">
-                  <h4 className="font-semibold text-wai">{username}</h4>
+                  <h4 className="font-semibold text-bunker-950">{username}</h4>
                 </div>
                 <div>
-                    <CgMoreVertical size={20} className="text-waikawa-400"  />
+                    <CgMoreVertical size={20} className="text-waikawa-400"
+                    onClick={handleMenuExpanding}
+                    />
                 </div>
+                    {
+                        menuExpanded && <div className="absolute top-[80vh] bg-waikawa-200 p-3 rounded-xl left-[32vh] transition-all duration-300">
+                            <button onClick={handleLogout} className="flex gap-2">
+                                <RiLogoutCircleLine className="translate-y-1" />
+                                Logout
+                            </button>
+                        </div>
+                    }
+
             </div>
             )}
           </div>

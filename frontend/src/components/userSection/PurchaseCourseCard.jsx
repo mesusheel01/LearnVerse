@@ -37,7 +37,7 @@ const PurchaseCourseCard = ({ course }) => {
       </p>
       {/* start or continue button */}
       <div >
-        <button className='border p-2 rounded-xl hover:shadow-lg hover:shadow-purple-800 hover:bg-bunker-950 hover:p-3 transition-all duration-300'>
+        <button className='border p-2 rounded-xl hover:shadow-lg hover:shadow-purple-800 hover:bg-bunker-950 hover:px-5 transition-all duration-300'>
             Resume
         </button>
       </div>

@@ -1,31 +1,38 @@
-import React, { useRef } from 'react'
-import { useRecoilState } from 'recoil'
-import { darkAtom } from '../../store/atoms/darkMode'
-import { liveInputAtom } from '../../store/atoms/input'
-import { FaUserGraduate } from 'react-icons/fa'
-import { CiSearch } from 'react-icons/ci'
+import React, { useEffect, useRef, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { darkAtom } from '../../store/atoms/darkMode';
+import { CiSearch } from 'react-icons/ci';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { courseAtom } from '../../store/atoms/courseFetch';
 
 const Navbar = () => {
-    const [theme, setTheme] = useRecoilState(darkAtom)
-    const [liveInput, setLiveInput] = useRecoilState(liveInputAtom)
-    const inputRef = useRef()
+    const [theme, setTheme] = useRecoilState(darkAtom);
+    const [searchQuery, setSearchQuery] = useState("");
+    const [filteredRes, setFilteredRes] = useState([]);
+    const modelCourses = useRecoilValue(courseAtom);
+    const inputRef = useRef();
+    const location = useLocation();
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        const res = modelCourses.filter(item =>
+            item.title.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+        setFilteredRes(res);
+    }, [searchQuery, location, modelCourses]);
 
     const toggleTheme = () => {
         setTheme((theme) => {
-            const newTheme = theme === 'dark' ? 'light' : 'dark'
-            document.documentElement.classList.remove(theme)
-            document.documentElement.classList.add(newTheme)
-            return newTheme
-        })
-    }
-
-    const handleLiveInputSearch = async (e) => {
-        setLiveInput(e.target.value)
-    }
+            const newTheme = theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.classList.remove(theme);
+            document.documentElement.classList.add(newTheme);
+            return newTheme;
+        });
+    };
 
     const giveRefToInput = () => {
-        inputRef.current.focus()
-    }
+        inputRef.current.focus();
+    };
 
     return (
         <>
@@ -34,21 +41,42 @@ const Navbar = () => {
                 <div className="text-lg sm:text-xl lg:text-2xl font-aclonica dark:text-waikawa-400">
                     LearnVerse
                 </div>
-                {/* liveSearch function */}
-                <div className='flex items-center gap-1 w-[25vh] sm:w-[30vh]'>
+                {/* Search Input */}
+                <div className="relative flex items-center gap-1 w-[25vh] sm:w-[30vh]">
                     <input
-                        value={liveInput}
+                        value={searchQuery}
                         ref={inputRef}
-                        type='text'
-                        placeholder='Search Courses...'
-                        onChange={handleLiveInputSearch}
-                        className='rounded-xl w-full pl-3 text-sm p-1 bg-input-color border border-1 text-waikawa-300 py-[.8vh] font-poppins border-waikawa-950 focus:outline-none focus:border-purple-800'
+                        type="text"
+                        placeholder="Search Courses..."
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        className="rounded-xl w-full pl-3 text-sm p-1 bg-input-color border border-1 text-waikawa-300 py-[.8vh] font-poppins border-waikawa-950 focus:outline-none focus:border-purple-800"
                     />
-                    <CiSearch onClick={giveRefToInput} className='text-waikawa-200 text-xl hover:text-2xl transition-all duration-200 hover:mt-0' />
+                    <CiSearch
+                        onClick={giveRefToInput}
+                        className="text-waikawa-200 text-xl hover:text-2xl transition-all duration-200 hover:mt-0"
+                    />
+                    {/* Search Results */}
+                    {searchQuery && filteredRes.length > 0 && (
+                        <div className="absolute top-full mt-2 w-full bg-white shadow-lg rounded-md border border-waikawa-200 dark:bg-bunker-950 dark:border-waikawa-600">
+                            {filteredRes.map((item) => (
+                                <div
+                                    onClick={()=>navigate(`/courses/${item?.title}`)}
+                                    key={item.id}
+                                    className="p-2 hover:bg-purple-100 dark:hover:bg-purple-900 text-waikawa-800 dark:text-waikawa-300 cursor-pointer"
+                                >
+                                    {item.title}
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                    {searchQuery && filteredRes.length === 0 && (
+                        <div className="absolute top-full mt-2 w-full bg-white shadow-lg rounded-md border border-waikawa-200 dark:bg-bunker-950 dark:border-waikawa-600 p-2 text-center text-waikawa-500 dark:text-waikawa-400">
+                            No results found
+                        </div>
+                    )}
                 </div>
                 {/* Links and Buttons */}
                 <div className="flex gap-3 font-aclonica text-[.7rem] md:text-[.8rem] items-center">
-
                     <button
                         onClick={toggleTheme}
                         className="p-2 rounded-full dark:text-waikawa-400 hover:dark:text-waikawa-600 transition duration-300"
@@ -88,7 +116,7 @@ const Navbar = () => {
                 </div>
             </nav>
         </>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;
