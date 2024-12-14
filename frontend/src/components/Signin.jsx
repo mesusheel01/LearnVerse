@@ -9,6 +9,7 @@ import { isPassAtom } from '../store/atoms/passText';
 import { errorAtom, loadingAtom } from '../store/atoms/errorAndLoading';
 import axios from 'axios';
 import { tokenAtom } from '../store/atoms/tokenCheck';
+import { useSnackbar } from 'notistack';
 
 const Signin = () => {
   const [username, setUsername] = useRecoilState(usernameAtom);
@@ -18,7 +19,7 @@ const Signin = () => {
   const [error, setError] = useRecoilState(errorAtom);
   const navigate = useNavigate();
   const setToken = useSetRecoilState(tokenAtom);
-
+  const {enqueueSnackbar} = useSnackbar()
 
   const handleSignin = async (e) => {
     e.preventDefault();
@@ -31,6 +32,7 @@ const Signin = () => {
 
       if (response.data.token) {
         setToken(response.data.token);
+        enqueueSnackbar("User Sign In successfully!", {variant:"success"})
         localStorage.setItem("token", response.data.token);
         console.log(response.data.token)
         navigate('/home');

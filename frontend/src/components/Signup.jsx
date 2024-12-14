@@ -10,6 +10,7 @@ import { PiPassword } from 'react-icons/pi';
 import { isPassAtom } from '../store/atoms/passText';
 import {loadingAtom, errorAtom} from '../store/atoms/errorAndLoading'
 import axios from 'axios';
+import { enqueueSnackbar } from 'notistack';
 
 
 const Signup = () => {
@@ -35,6 +36,7 @@ const Signup = () => {
             console.log(response.data)
             if(response.data.token){
                 setLoading(false)
+                enqueueSnackbar("User signed up successfully!", {variant:"success"})
                 localStorage.setItem("token", response.data.token)
             }
             navigate('/signin')

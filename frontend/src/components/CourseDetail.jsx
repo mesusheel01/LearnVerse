@@ -6,6 +6,7 @@ import SideBar from './courses/SideBar';
 import { errorAtom, loadingAtom } from '../store/atoms/errorAndLoading';
 import { buttonMsgAtom } from '../store/atoms/buttonMsg';
 import axios from 'axios';
+import { useSnackbar } from 'notistack';
 
 export const CourseDetail = () => {
   return (
@@ -22,6 +23,7 @@ export const MainCourseDetail = () => {
   const [error, setError] = useRecoilState(errorAtom);
   const [loading, setLoading] = useRecoilState(loadingAtom);
   const [buttonMsg, setButtonMsg] = useRecoilState(buttonMsgAtom);
+  const {enqueueSnackbar} = useSnackbar()
   console.log(buttonMsg)
   const handleCoursePurchase = async (courseId) => {
     try {
@@ -45,6 +47,7 @@ export const MainCourseDetail = () => {
 
       if (response.status === 201) {
         setLoading(false);
+        enqueueSnackbar("Purchase Complete",{variant:"success"})
         console.log('Course purchased successfully:', response.data);
         setButtonMsg('Purchased!');
       } else {

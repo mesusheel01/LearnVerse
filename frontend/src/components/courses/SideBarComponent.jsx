@@ -7,6 +7,7 @@ import { tokenAtom } from "../../store/atoms/tokenCheck";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { RiLogoutCircleLine } from "react-icons/ri";
+import { enqueueSnackbar } from "notistack";
 
 
 export const SidebarComponent = ({ children }) => {
@@ -53,6 +54,7 @@ export const SidebarComponent = ({ children }) => {
     setMenuExpanded(!menuExpanded)
   }
     const handleLogout = ()=>{
+        enqueueSnackbar("User Logged Out!",{variant:"success"})
         localStorage.removeItem("token");
         window.location.href = 'http://localhost:5173'
     }

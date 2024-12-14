@@ -7,11 +7,13 @@ import Landing from './components/Landing'
 import UserSection from './components/UserSection'
 import { RecoilRoot } from 'recoil'
 import {CourseDetail} from './components/CourseDetail'
+import { SnackbarProvider } from 'notistack'
 
 
 const App = () => {
 
   return (
+    <SnackbarProvider>
     <RecoilRoot>
         <BrowserRouter>
             <Routes>
@@ -24,6 +26,7 @@ const App = () => {
             </Routes>
         </BrowserRouter>
     </RecoilRoot>
+    </SnackbarProvider>
   )
 }
 
