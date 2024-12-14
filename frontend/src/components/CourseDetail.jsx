@@ -36,7 +36,7 @@ export const MainCourseDetail = () => {
 
       const response = await axios.post(
         `http://localhost:3000/api/user/courses/${courseId}`,
-        {
+        {},{
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -88,11 +88,7 @@ export const MainCourseDetail = () => {
           </div>
         </div>
         <button
-          onClick={() => {
-                if(buttonMsg !== 'Purchased!' || buttonMsg !== 'View Details'){
-                    handleCoursePurchase(courseBuyDetail?._id)
-                }
-            }}
+          onClick={()=>handleCoursePurchase(courseBuyDetail?._id)}
           className="dark:bg-bunker-950 dark:text-waikawa-100 transition-all duration-300 px-6 w-[20vh] absolute top-[40vh] left-44 border hover:shadow-lg hover:shadow-red-300 hover:border-waikawa-600  p-2 rounded-xl"
         >
           {loading ? 'Buying...' : buttonMsg === 'View Details'?"Already Purchased!": buttonMsg === 'Purchased!'?"Purchased!": "Buy Now"}

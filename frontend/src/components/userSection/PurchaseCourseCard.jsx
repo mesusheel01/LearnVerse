@@ -2,7 +2,7 @@ import React from 'react';
 
 const PurchaseCourseCard = ({ course }) => {
   return (
-    <div key={course._id} className="inline-block mt-4 bg-white shadow-md rounded-xl p-4 max-w-[300px] mx-2 transform transition duration-300 hover:-translate-y-4 dark:bg-waikawa-900 dark:text-white">
+    <div key={course._id} className="mt-4 bg-white shadow-lg border border-waikawa-600  rounded-xl p-4 max-w-[400px] mx-2 transform transition duration-300 flex flex-col  items-center dark:bg-waikawa-950 dark:text-white">
       <div className="w-full h-32 bg-gray-200 rounded-t-md overflow-hidden">
         <img
           src={course?.imageUrl}
@@ -35,14 +35,11 @@ const PurchaseCourseCard = ({ course }) => {
       >
         {course?.description}
       </p>
-
-      <div className="mt-4 flex justify-between items-center">
-        <p className="text-lg font-semibold text-green-600">
-          ₹{course?.price}
-        </p>
-        <p className="text-sm text-gray-500">
-          By: {course?.courseBy}
-        </p>
+      {/* start or continue button */}
+      <div >
+        <button className='border p-2 rounded-xl hover:shadow-lg hover:shadow-purple-800 hover:bg-bunker-950 hover:p-3 transition-all duration-300'>
+            Resume
+        </button>
       </div>
     </div>
   );

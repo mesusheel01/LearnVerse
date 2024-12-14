@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SidebarComponent, SideBarItem } from './SideBarComponent';
 import { BsSave2 } from 'react-icons/bs';
 import { HiOutlineHome } from 'react-icons/hi';
@@ -10,7 +10,7 @@ import { tokenAtom } from '../../store/atoms/tokenCheck';
 const SideBar = () => {
   const expanded = useRecoilValue(toggleSidebarAtom);
   const token = useRecoilValue(tokenAtom);
-  const [activeButton, setActiveButton] = React.useState('Purchases');
+  const [activeButton, setActiveButton] = useState('');
 
   return (
     <div>

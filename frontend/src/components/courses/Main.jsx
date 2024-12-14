@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { courseAtom } from '../../store/atoms/courseFetch';
 import { errorAtom, loadingAtom } from '../../store/atoms/errorAndLoading';
-import { purchasesAtom } from '../../store/atoms/purchaseCourse';
-import { buttonMsgAtom } from '../../store/atoms/buttonMsg';
 import { useRecoilState } from 'recoil';
 import axios from 'axios';
 import CoursePageCard from './CoursePageCard';
@@ -12,8 +10,6 @@ const Main = () => {
     const [loading, setLoading] = useRecoilState(loadingAtom);
     const [errormsg, setErrormsg] = useRecoilState(errorAtom);
     const [modelCourse, setModelCourse] = useRecoilState(courseAtom);
-    const [purchaseModel, setPurchaseModel] = useRecoilState(purchasesAtom);
-    const [buttonMsg, setButtonMsg] = useRecoilState(buttonMsgAtom);
 
     const fetchCoursesAndPurchases = async () => {
         try {
@@ -46,8 +42,6 @@ const Main = () => {
             console.log(updatedCourses)
             console.log(userPurchases)
             setModelCourse(updatedCourses);
-            setPurchaseModel(userPurchases);
-
             setLoading(false);
         } catch (err) {
             setLoading(false);

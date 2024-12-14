@@ -4,19 +4,20 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight } from "react-icons/md";
 import image from '../../assets/Images/image.png'
 import { tokenAtom } from "../../store/atoms/tokenCheck";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {activeAtom}  from '../../store/atoms/sidebarActiveState'
+import { jwtDecode } from "jwt-decode";
 
 
 export const SidebarComponent = ({ children }) => {
   const [expanded, setExpanded] = useRecoilState(toggleSidebarAtom);
   const [token, setToken] = useRecoilState(tokenAtom);
-
+  const [username, setUsername] = useState("")
 
   useEffect(() => {
     const tokenCheck = localStorage.getItem("token");
-
+    const decode = jwtDecode(token)
+    setUsername(decode.username)
     if (tokenCheck) {
       const decodedToken = JSON.parse(atob(tokenCheck.split(".")[1]));
       const expiryTime = decodedToken.exp * 1000 + 3600;
@@ -65,22 +66,21 @@ export const SidebarComponent = ({ children }) => {
 
         <ul className="flex-1 px-3">{children}</ul>
         {token && (
-          <div className="border-t border-waikawa-600 flex p-3">
+          <div className="border-t border-waikawa-600 flex p-2">
             <img
               src={image}
               alt="user_image"
-              className="w-10 h-10 rounded-md bg-waikawa-800 mt-2"
+              className="w-10 h-10 rounded-md bg-waikawa-800"
             />
             {expanded && (
-              <div className="flex justify-between items-center w-full ml-3">
-                <div className="bg-waikawa-800 rounded-lg p-1">
-                  <h4 className="font-semibold text-wai">Susheel Kyle</h4>
-                  <span className="text-xs text-waikawa-950">
-                    Susheelkyle@gmail.com
-                  </span>
+              <div className="flex justify-between items-center w-full ml-5 ">
+                <div className="bg-waikawa-800 rounded-lg p-2">
+                  <h4 className="font-semibold text-wai">{username}</h4>
                 </div>
-                <CgMoreVertical size={20} className="text-waikawa-400" onClick={()=>setUserMenu(curr => !curr)} />
-              </div>
+                <div>
+                    <CgMoreVertical size={20} className="text-waikawa-400"  />
+                </div>
+            </div>
             )}
           </div>
         )}
