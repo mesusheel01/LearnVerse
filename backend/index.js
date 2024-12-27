@@ -6,6 +6,7 @@ import userRouter from './routes/userRoute.js'
 import publicCourseRouter from './routes/publicCourseRoute.js'
 dotenv.config()
 
+const PORT = process.env.PORT || 4000
 const app = express()
 
 //cors for cross origin resourse sharing
@@ -34,6 +35,6 @@ app.use('/api/user', userRouter)
 // public coures view route
 app.use('/api/courses', publicCourseRouter)
 
-app.listen(process.env.PORT, ()=>{
-    console.log(`Server is listening at http://localhost:${process.env.PORT}`)
+app.listen(PORT, ()=>{
+    console.log(`Server is listening at http://localhost:${PORT}`)
 })
