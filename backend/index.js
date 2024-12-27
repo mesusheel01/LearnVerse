@@ -14,7 +14,9 @@ app.use(cors({
     method:['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials:true
 }))
-
+app.get('/',(req,res)=>{
+    res.send("Server is hosted!")
+})
 //middleware to accept json body by express
 app.use(express.json())
 
