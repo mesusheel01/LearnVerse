@@ -1,3 +1,4 @@
 # enviromental varialbe file
 .env
 .vercel
+.node_modules
