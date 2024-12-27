@@ -41,6 +41,9 @@
   ## Authentication:
   -Done by JWT
 
+  ## Search Shortcut
+    - Used Ctrl + k for easy refrence to search bar
+
 **Routes**:-
     - '/': Landing page
     - '/singin': Signin Page
@@ -57,3 +60,4 @@
 - **Main Landing Page** :- ![alt text](image.png)
 - **Signup Page** :- ![alt text](image-3.png)
 - **Signin Page** :- ![alt text](image-4.png)
+- **Home Page** :-

@@ -18,7 +18,12 @@ app.use(cors({
 //middleware to accept json body by express
 app.use(express.json())
 
+
+//using uploads as static images
+app.use('/uploads', express.static('uploads'))
+
 //admin routes will go to admin router middleware
+
 app.use('/api/admin', adminRouter)
 
 //user route will go to user middleware and purchasing and getting their courses will be handlded

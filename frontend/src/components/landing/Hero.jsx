@@ -50,8 +50,8 @@ const Hero = () => {
 
             {
                 !loading && !errormsg &&  <div className="relative hidden md:block">
-                <div className="absolute gradient-left top-10  left-[18vh] lg:left-[17vh] lg:top-[1.8rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-r from-waikawa-900 to-transparent"></div>
-                <div className="absolute gradient-right left-[78vw] lg:left-[87vw] top-[5vh] lg:top-[1.8rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-l from-waikawa-900 to-transparent"></div>
+                <div className="absolute gradient-left top-10  left-[18vh] lg:left-[17vh] lg:top-[3rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-r from-waikawa-900 to-transparent"></div>
+                <div className="absolute gradient-right left-[78vw] lg:left-[86.5vw] top-[5vh] lg:top-[3rem] h-[48vh] lg:h-[45vh] w-[5vw] rounded-xl bg-gradient-to-l from-waikawa-900 to-transparent"></div>
             </div>
             }
             <div className="text-red-400 mt-8 text-center">

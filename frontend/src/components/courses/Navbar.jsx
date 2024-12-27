@@ -19,6 +19,19 @@ const Navbar = () => {
             item.title.toLowerCase().includes(searchQuery.toLowerCase())
         );
         setFilteredRes(res);
+        const handleSearchShortcut=(event)=>{
+
+            if(event.ctrlKey && event.key === 'k'){
+                console.log('shortcut')
+                giveRefToInput()
+            }
+        }
+        window.addEventListener("keydown", handleSearchShortcut);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleSearchShortcut);
+    };
     }, [searchQuery, location, modelCourses]);
 
     const toggleTheme = () => {

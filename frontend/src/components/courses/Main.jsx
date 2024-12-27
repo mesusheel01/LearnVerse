@@ -41,6 +41,7 @@ const Main = () => {
             });
             console.log(updatedCourses)
             console.log(userPurchases)
+            
             setModelCourse(updatedCourses);
             setLoading(false);
         } catch (err) {
