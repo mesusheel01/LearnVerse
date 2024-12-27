@@ -57,7 +57,7 @@ const Navbar = () => {
                     />
                     {/* Search Results */}
                     {searchQuery && filteredRes.length > 0 && (
-                        <div className="absolute top-full mt-2 w-full bg-white shadow-lg rounded-md border border-waikawa-200 dark:bg-bunker-950 dark:border-waikawa-600">
+                        <div className="absolute top-full mt-8 w-full bg-white shadow-lg rounded-md border border-waikawa-200 dark:bg-bunker-950 dark:border-waikawa-600">
                             {filteredRes.map((item) => (
                                 <div
                                     onClick={()=>navigate(`/courses/${item?.title}`)}
