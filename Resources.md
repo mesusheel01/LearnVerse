@@ -7,3 +7,5 @@
 - **Signup Page** :- ![alt text](image-3.png)
 
 - **Signin Page** :- ![alt text](image-4.png)
+
+- **Home Page**:- ![alt text](image-1.png)
