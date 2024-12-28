@@ -13,7 +13,7 @@ const SideBar = () => {
   const [activeButton, setActiveButton] = useState('');
 
   return (
-    <div>
+    <aside>
       <div
         className={`${
           expanded ? 'w-54' : 'w-16'
@@ -42,7 +42,7 @@ const SideBar = () => {
           )}
         </SidebarComponent>
       </div>
-    </div>
+    </aside>
   );
 };
 
