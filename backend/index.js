@@ -11,7 +11,7 @@ const app = express()
 
 //cors for cross origin resourse sharing
 app.use(cors({
-    origin:'https://learn-verse-chi.vercel.app/',
+    origin:'https://learn-verse-chi.vercel.app',
     method:['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     credentials:true
 }))
