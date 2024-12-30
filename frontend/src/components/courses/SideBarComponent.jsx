@@ -56,7 +56,7 @@ export const SidebarComponent = ({ children }) => {
     const handleLogout = ()=>{
         enqueueSnackbar("User Logged Out!",{variant:"success"})
         localStorage.removeItem("token");
-        window.location.href = 'http://localhost:5173'
+        window.location.href = 'https://learn-verse-chi.vercel.app/'
     }
 console.log(menuExpanded)
 

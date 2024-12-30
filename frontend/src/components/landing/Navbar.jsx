@@ -27,7 +27,7 @@ const Navbar = () => {
             {/* Links and Buttons */}
             <div className="flex gap-3 font-aclonica text-[.7rem]  md:text-[.8rem] items-center">
                 <a
-                    href="http://localhost:5173/courses"
+                    href="https://learn-verse-chi.vercel.app/courses"
                     className="hidden sm:inline-block dark:text-waikawa-400  hover:dark:text-waikawa-600 transition duration-300"
                 >
                     Courses

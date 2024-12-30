@@ -17,7 +17,7 @@ const Hero = () => {
     const fetchCourses = async () => {
         try {
             setLoading(true);
-            const { data } = await axios.get('http://localhost:3000/api/courses');
+            const { data } = await axios.get('https://learnverse-ib6o.onrender.com/api/courses');
             console.log('Fetched courses:', data.courses);
             if (data.courses && data.courses.length) {
                 setModelCourse(data.courses);

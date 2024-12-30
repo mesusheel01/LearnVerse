@@ -20,7 +20,7 @@
                     setError("Login To purchase!")
                     return
                 }
-                const response = await axios.get(`http://localhost:3000/api/user/courses/${courseId}`,{
+                const response = await axios.get(`https://learnverse-ib6o.onrender.com/user/courses/${courseId}`,{
                     headers:{
                         Authorization: `Bearer ${token}`
                     }

@@ -16,9 +16,9 @@ const Main = () => {
             setLoading(true);
             const token = localStorage.getItem("token")
             const [allCoursesRes, userPurchasesRes] = await Promise.all([
-                axios.get('http://localhost:3000/api/courses'),
+                axios.get('https://learnverse-ib6o.onrender.com/api/courses'),
                 axios.get(
-                    `http://localhost:3000/api/user/purchasedCourses`,
+                    `https://learnverse-ib6o.onrender.com/api/user/purchasedCourses`,
                     {
                       headers: {
                         Authorization: `Bearer ${token}`,
@@ -41,7 +41,7 @@ const Main = () => {
             });
             console.log(updatedCourses)
             console.log(userPurchases)
-            
+
             setModelCourse(updatedCourses);
             setLoading(false);
         } catch (err) {

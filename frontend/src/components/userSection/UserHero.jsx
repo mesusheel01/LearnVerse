@@ -20,8 +20,8 @@ const UserHero = () => {
             setUsername(decode.username);
 
             const [allCoursesRes, userPurchasesRes] = await Promise.all([
-                axios.get('http://localhost:3000/api/courses'),
-                axios.get('http://localhost:3000/api/user/purchasedCourses', {
+                axios.get('https://learnverse-ib6o.onrender.com/api/courses'),
+                axios.get('https://learnverse-ib6o.onrender.com/api/user/purchasedCourses', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -73,7 +73,7 @@ const UserHero = () => {
                             <div className='text-waikawa-200 text-xl text-center'>
                                 No courses available to show! Use Sidebar to go to courses section and purchase.
                             </div>
-                        ) : ( 
+                        ) : (
                             modelCourse.map((course) => (
                                 <PurchaseCourseCard key={course._id} course={course} />
                             ))

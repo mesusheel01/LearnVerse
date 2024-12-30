@@ -128,8 +128,8 @@ const Navbar = () => {
                     </button>
                 </div>
             </nav>
-        </>
-    );
+        </>)
 };
+
 
 export default Navbar;

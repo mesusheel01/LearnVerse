@@ -37,7 +37,7 @@ export const MainCourseDetail = () => {
       }
 
       const response = await axios.post(
-        `http://localhost:3000/api/user/courses/${courseId}`,
+        `https://learnverse-ib6o.onrender.com/api/user/courses/${courseId}`,
         {},{
           headers: {
             Authorization: `Bearer ${token}`,
