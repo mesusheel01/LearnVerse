@@ -29,7 +29,7 @@ const Signup = () => {
         try{
             setLoading(true)
             const response = await axios.post("https://learnverse-ib6o.onrender.com/api/user/signup", {
-                username,https://learnverse-ib6o.onrender.com/
+                username,
                 email,
                 password,
             })
@@ -117,7 +117,7 @@ const Signup = () => {
                 {loading? "Signing up...": "Signup"}
             </button>
                 {
-                    error && <p>{error}</p>
+                    error && <p className='text-red-500 font-mono'>{error}</p>
                 }
             </div>
         </form>

@@ -99,7 +99,7 @@ const Signin = () => {
             >
               {loading ? "Signin in..." : "Signin"}
             </button>
-            {error && <p className='text-purple-400'>{error}</p>}
+            {error && <p className='text-red-500 font-mono'>{error}</p>}
           </div>
         </form>
       </div>
