@@ -2,10 +2,12 @@ import React from 'react'
 import Button from './Button'
 import { useRecoilState } from 'recoil'
 import { darkAtom } from '../../store/atoms/darkMode'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const [theme, setTheme] = useRecoilState(darkAtom)
-
+    const navigate = useNavigate()
+    
     const toggleTheme = () => {
         setTheme((theme) => {
             const newTheme = theme === 'dark' ? 'light' : 'dark'
@@ -26,12 +28,12 @@ const Navbar = () => {
 
             {/* Links and Buttons */}
             <div className="flex gap-3 font-aclonica text-[.7rem]  md:text-[.8rem] items-center">
-                <a
-                    href="https://learn-verse-chi.vercel.app/courses"
+                <button
+                    onClick={()=>navigate('/courses')}
                     className="hidden sm:inline-block dark:text-waikawa-400  hover:dark:text-waikawa-600 transition duration-300"
                 >
                     Courses
-                </a>
+                </button>
                 <Button title="Signup" routeTo="/signup" />
                 <Button title="Signin" routeTo="/signin" />
 
