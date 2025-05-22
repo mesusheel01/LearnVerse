@@ -10,7 +10,7 @@ import { useSnackbar } from 'notistack';
 
 export const CourseDetail = () => {
   return (
-    <div className="bg-bunker-950 flex flex-col min-h-screen mt-20">
+    <div className="bg-bunker-950  flex flex-col min-h-screen mt-20">
       <Navbar />
       <SideBar />
       <MainCourseDetail />
