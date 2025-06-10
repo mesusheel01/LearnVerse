@@ -35,7 +35,7 @@ const Hero = () => {
 
     return (
         <div>
-            <div className="flex flex-col items-center justify-center gap-8 mt-16 font-aclonica">
+            <div className="flex flex-col items-center min-h-[25rem] justify-center gap-8 mt-16 font-aclonica">
                 <p className="dark:text-waikawa-200 text-lg sm:text-2xl md:text-3xl lg:text-4xl">
                     Turn Your Ambitions <br />
                     <span className="pl-2">into Achievements!</span>
